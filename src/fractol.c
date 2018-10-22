@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FRACTOL.c                                          :+:      :+:    :+:   */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/19 18:10:17 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:41:37 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 static void		die(void *mlx, void *win, int r)
 {
@@ -37,17 +38,21 @@ static void		hooks(void *mlx, void *win)
 	mlx_loop(mlx);
 }
 
-int				main(void)
+t_env	init(int c, char **v)
 {
-	void	*mlx;
-	void	*win;
+	t_env out;
 
-	mlx = mlx_init();
-	win = NULL;
-	if (mlx)
-		win = mlx_new_window(mlx, K_W, K_H, "fractol");
-	else die(mlx, win, -1);
-	hooks(mlx, win);
+	out->mlx = mlx_init();
+	out->win = mlx_new_window(out->mlx, W_WIDTH, W_HEIGHT, "fractol");
+	out->fractal.id = atoi(argv[1])
+	
+}
 
+int		main(int c, char **v)
+{
+	t_env e;
+
+	e = init(c,v);
+	hooks(e->mlx, e->win);
 	return (0);
 }
