@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 12:46:45 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 16:23:49 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ void	iwrite(t_params *e, int x, int y, int color)
 
 int		rgb_to_i(int r, int g, int b)
 {
-	return ((((r << 16) + g) << 8) + b);
+	return ((r << 16) + (g << 8) + b);
 }
 
-void	z_iter(t_complex *z, t_complex *c)
+int		z_iter(t_complex *z, t_complex *c)
 {
-	t_complex tmp;
+	t_complex	tmp;
 
 	tmp.i = z->i;
 	tmp.r = z->r;
 	z->r = tmp.r * tmp.r - tmp.i * tmp.i + c->r;
 	z->i = 2 * tmp.r * tmp.i + c->i;
+	return ((int)((z->r * z->r + z->i * z->i >= 4)));
 }

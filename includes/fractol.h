@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 12:45:42 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 16:19:50 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ typedef struct	s_fractal
 	int			gen;
 }				t_fractal;
 
-typedef struct		s_clic
+typedef struct	s_clic
 {
-	int				active;
-	int				x;
-	int				y;
-}					t_clic;
+	int			active;
+	int			x;
+	int			y;
+}				t_clic;
 
 typedef struct	s_image
 {
@@ -60,7 +60,7 @@ typedef struct	s_params
 {
 	void		*mlx;
 	void		*win;
-	t_fractal	fractal;
+	t_fractal	frac;
 	t_image		img;
 	t_clic		clic;
 }				t_params;
@@ -73,9 +73,14 @@ void			die(void *mlx, void *win, int r);
 void			mandelbrot(t_params *e);
 
 /*
-**	mandelbrot.c
+**	julia.c
 */
 void			julia(t_params *e);
+
+/*
+**	burningship.c
+*/
+void			burningship(t_params *e);
 
 /*
 **	hooks.c
@@ -96,6 +101,6 @@ int				ft_isspace(char c);
 */
 void			iwrite(t_params *e, int x, int y, int color);
 int				rgb_to_i(int r, int g, int b);
-void			z_iter(t_complex *z, t_complex *c);
+int				z_iter(t_complex *z, t_complex *c);
 
 #endif
