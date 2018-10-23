@@ -34,6 +34,13 @@ typedef struct	s_fractal
 	int			gen;
 }				t_fractal;
 
+typedef struct		s_clic
+{
+	int				active;
+	int				x;
+	int				y;
+}					t_clic;
+
 typedef struct	s_image
 {
 	void		*ptr;
@@ -55,6 +62,7 @@ typedef struct	s_params
 	void		*win;
 	t_fractal	fractal;
 	t_image		img;
+	t_clic		clic;
 }				t_params;
 
 void			die(void *mlx, void *win, int r);
@@ -63,6 +71,11 @@ void			die(void *mlx, void *win, int r);
 **	mandelbrot.c
 */
 void			mandelbrot(t_params *e);
+
+/*
+**	mandelbrot.c
+*/
+void			julia(t_params *e);
 
 /*
 **	hooks.c

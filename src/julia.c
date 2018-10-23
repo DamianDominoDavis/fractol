@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static t_complex	julia_init(int x, int y, t_params *e, t_complex *c)
+static t_complex	z_init(int x, int y, t_params *e, t_complex *c)
 {
 	t_complex		z;
 	double		min_x;
@@ -24,10 +24,10 @@ static t_complex	julia_init(int x, int y, t_params *e, t_complex *c)
 	max_x = (e->fractal.max_x / e->fractal.zoom) + e->fractal.pos_x;
 	min_y = (-e->fractal.max_y / e->fractal.zoom) + e->fractal.pos_y;
 	max_y = (e->fractal.max_y / e->fractal.zoom) + e->fractal.pos_y;
-	z.real = min_x + (max_x - min_x) / W_WIDTH * (x);
-	z.img = min_y + (max_y - min_y) / W_HEIGHT * (y);
-	c->real = (e->clic.x * 0.5) / (long double)W_WIDTH;
-	c->img = (e->clic.y * 0.5) / (long double)W_HEIGHT;
+	z.r = min_x + (max_x - min_x) / W_WIDTH * (x);
+	z.i = min_y + (max_y - min_y) / W_HEIGHT * (y);
+	c->r = (e->clic.x * 0.5) / (long double)W_WIDTH;
+	c->i = (e->clic.y * 0.5) / (long double)W_HEIGHT;
 	return (z);
 }
 
@@ -67,12 +67,12 @@ void				julia(t_params *e)
 		x = -1;
 		while (++x < W_WIDTH)
 		{
-			z = z_init(x, y, e, c);
+			z = z_init(x, y, e, &c);
 			i = -1;
 			while (++i < MAX_IT)
 			{
 				z_iter(&z, &c);
-				if (z.real * z.real + z.img * z.img >= 4)
+				if (z.r * z.r + z.i * z.i >= 4)
 					break ;
 			}
 			iwrite(e, x, y, color(i));
