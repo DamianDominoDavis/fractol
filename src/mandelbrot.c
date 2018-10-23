@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 14:37:04 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/22 22:10:05 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 14:06:18 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,14 @@ static void	c_init(int x, int y, t_params *e, t_complex *c)
 	c->i = min_y + y * (max_y - min_y) / W_HEIGHT;
 }
 
-static void	z_iter(t_complex *z, t_complex *c)
-{
-	t_complex tmp;
-
-	tmp.i = z->i;
-	tmp.r = z->r;
-	z->r = tmp.r * tmp.r - tmp.i * tmp.i + c->r;
-	z->i = 2 * tmp.r * tmp.i + c->i;
-}
-
 static int	color(int i, t_params *e)
 {
 	int	tmp;
 
 	(void)e;
-	//tmp = (e->fractal.gen) ? (int)(MAX_IT + e->fractal.zoom / 1000) : MAX_IT;
-	tmp = MAX_IT;
+	tmp = (e->fractal.gen) ? (int)(MAX_IT + e->fractal.zoom / 1000) : MAX_IT;
 	if (i == tmp)
-		return (C_GOLD);
+		return (rgb_to_i(25, 25, 76));
 	else
 		return (rgb_to_i(
 			sin((float)i / ((float)MAX_IT / 1.5)) * 255,
@@ -70,8 +59,7 @@ void		mandelbrot(t_params *e)
 			c_init(x, y, e, &c);
 			z = (t_complex){(long double)0, (long double)0};
 			i = -1;
-			//while (i < (int)(MAX_IT + (e->fractal.zoom / 1000) * e->fractal.gen))
-			while (++i < (int)(MAX_IT + e->fractal.zoom / 1000))
+			while (++i < (int)(MAX_IT + (e->fractal.zoom / 1000) * e->fractal.gen))
 			{
 				z_iter(&z, &c);
 				if (z.r * z.r + z.i * z.i >= 4)

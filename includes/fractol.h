@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/22 16:41:38 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 12:45:42 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int				ft_isspace(char c);
 */
 void			iwrite(t_params *e, int x, int y, int color);
 int				rgb_to_i(int r, int g, int b);
+void			z_iter(t_complex *z, t_complex *c);
 
 #endif
