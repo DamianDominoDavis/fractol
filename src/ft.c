@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
+/*   Updated: 2018/10/22 22:03:46 by cbrill           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	char *ptr;
+	const char *ptr;
 
 	ptr = str;
-	while (*ptr++) ;
-	return (ptr - str - 1);
+	while (*ptr)
+		ptr++;
+	return (ptr - str);
 }
 
 void	ft_putstr(char *s)

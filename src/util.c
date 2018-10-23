@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
+/*   Updated: 2018/10/22 22:00:13 by cbrill           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	iwrite(t_params *e, int x, int y, int color)
@@ -14,7 +26,7 @@ void	iwrite(t_params *e, int x, int y, int color)
 	}
 }
 
-int	rgb_to_i(int r, int g, int b)
+int		rgb_to_i(int r, int g, int b)
 {
 	return ((((r << 16) + g) << 8) + b);
 }
