@@ -20,9 +20,8 @@
 # define W_WIDTH (int)700
 # define W_HEIGHT (int)500
 # define MAX_IT (int)60
-# define C_WHITE ((int)16777215)
-# define C_GOLD (int)
-# define Z_BLANK (t_img){(long double)0,(long double)0}
+# define C_WHITE (int)16777215
+# define C_GOLD (int)-939475336
 
 typedef struct s_fractal
 {
@@ -32,31 +31,58 @@ typedef struct s_fractal
 	float	pos_y;
 	double	max_x;
 	double	max_y;
-	int		gen;
+	//int		gen;
 }	t_fractal;
 
 typedef struct s_image
 {
-	//void	*ptr;
+	void	*ptr;
 	char	*data;
 	int		bpp;
 	int		size_line;
-	//int	endian;
-}	t_img;
+	int		endian;
+}	t_image;
 
-typedef struct s_img
+typedef struct s_complex
 {
-	long double img;
-	long double real;
-}	t_img;
+	long double i;
+	long double r;
+}	t_complex;
 
-typedef struct s_env
+typedef struct s_params
 {
 	void		*mlx;
 	void		*win;
 	t_fractal	fractal;
-	t_img		img;
+	t_image		img;
 
-}	t_env;
+}	t_params;
+
+void		die(void *mlx, void *win, int r);
+
+/*
+**	mandelbrot.c
+*/
+void	mandelbrot(t_params *e);
+
+/*
+**	hooks.c
+*/
+void	hooks(t_params *e);
+
+/*
+**	ft.c
+*/
+size_t	ft_strlen(char *str);
+void	ft_putstr(char *str);
+int		ft_atoi(const char *str);
+int		ft_isdigit(char c);
+int		ft_isspace(char c);
+
+/*
+**	util.c
+*/
+void	iwrite(t_params *e, int x, int y, int color);
+int		rgb_to_i(int r, int g, int b);
 
 #endif

@@ -1,7 +1,7 @@
 NAME = fractol
 
 SRC_DIR = ./src/
-SRC_FILES = fractol.c
+SRC_FILES = fractol.c mandelbrot.c ft.c hooks.c util.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 INC_DIR = ./includes/
