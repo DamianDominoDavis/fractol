@@ -47,19 +47,29 @@ void		die(void *mlx, void *win, int r)
 	exit(r);
 }
 
+/*
+** hook constants from typical /usr/include/X11/X.h
+*/
 int			main(int c, char **v)
 {
 	t_params e;
 
 	if (c > 1 && c < 3 && 0 == init(c, v, &e))
-		hooks(&e);
+	{
+		mlx_hook(e.win, 6, (1L<<6), motion_notify, &e);
+		mlx_hook(e.win, 4, (1L<<2), button_press, &e);
+		mlx_hook(e.win, 5, (1L<<3), button_release, &e);
+		mlx_hook(e.win, 2, 5, key_press, &e);
+		mlx_loop_hook(e.mlx, loop, &e);
+		mlx_loop(e.mlx);
+	}
 	else
 	{
 		ft_putstr("usage: fractol id [opt]\n");
 		ft_putstr("id:\t[1] Mandelbrot, c = 0+0i\n");
 		ft_putstr("\t[2] Julia, c = (\u03A6-2)+(\u03A6-1)i\n");
 		ft_putstr("\t[3] Burning Ship, c = 0+0i\n");
-		ft_putstr("\t[4] Newton, c = 0+0i\n");
+		//ft_putstr("\t[4] Newton, c = 0+0i\n");
 		ft_putstr("opt:\tabsolutely useless\n");
 	}
 	return (0);

@@ -24,7 +24,7 @@
 # define C_GOLD (int)-939475336
 # define C_NAVY (int)1644876
 # define C_WATERMELON (int)16992805
-# define IDMAX (int)4
+# define IDMAX (int)3
 
 typedef struct	s_fractal
 {
@@ -68,10 +68,14 @@ typedef struct	s_params
 	t_clic		clic;
 }				t_params;
 
+/*
+**	main.c
+*/
 void			die(void *mlx, void *win, int r);
+void			hooks(t_params *e);
 
 /*
-**	fractals
+**	<fractal>.c
 */
 void			mandelbrot(t_params *e);
 void			julia(t_params *e);
@@ -95,7 +99,11 @@ int				rgbint(int r, int g, int b);
 /*
 **	hooks.c
 */
-void			hooks(t_params *e);
+int	button_press(int keycode, int x, int y, t_params *e);
+int	button_release(int keycode, int x, int y, t_params *e);
+int	motion_notify(int x, int y, t_params *e);
+int	loop(t_params *e);
+int	key_press(int key, t_params *e);
 
 
 #endif
