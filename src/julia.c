@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 22:19:59 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 16:23:22 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 18:43:31 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ static t_complex	z_init(int x, int y, t_params *e, t_complex *c)
 	c->r = 0.5 * (1 + sqrt(5)) - 2;
 	c->i = 0.5 * (1 + sqrt(5)) - 1;
 	return (z);
+}
+
+static int			z_iter(t_complex *z, t_complex *c)
+{
+	t_complex	tmp;
+
+	tmp.i = z->i;
+	tmp.r = z->r;
+	z->r = tmp.r * tmp.r - tmp.i * tmp.i + c->r;
+	z->i = 2 * tmp.r * tmp.i + c->i;
+	return ((int)((z->r * z->r + z->i * z->i >= 4)));
 }
 
 static int			color(int i)

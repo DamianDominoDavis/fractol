@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   newton.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 14:37:04 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 19:39:59 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 19:05:58 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	z_iter(t_complex *z, t_complex *c)
 
 	tmp.i = z->i;
 	tmp.r = z->r;
-	z->r = tmp.r * tmp.r - tmp.i * tmp.i + c->r;
-	z->i = 2 * tmp.r * tmp.i + c->i;
+	z->r = tmp.r * tmp.r * tmp.r - 3 * tmp.r * tmp.i * tmp.i - 1 + c->i;
+	z->i = 3 * tmp.r * tmp.r * tmp.i - tmp.i * tmp.i * tmp.i + c->r;
 	return ((int)((z->r * z->r + z->i * z->i >= 4)));
 }
 
@@ -52,7 +52,7 @@ static int	color(int i, t_params *e)
 			sin((float)i / ((float)MAX_IT / 3.5)) * 255));
 }
 
-void		mandelbrot(t_params *e)
+void		newton(t_params *e)
 {
 	int			i;
 	int			x;

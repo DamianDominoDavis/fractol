@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 16:19:50 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 19:38:29 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define MAX_IT (int)60
 # define C_WHITE (int)16777215
 # define C_GOLD (int)-939475336
+# define IDMAX (int)4
 
 typedef struct	s_fractal
 {
@@ -68,24 +69,12 @@ typedef struct	s_params
 void			die(void *mlx, void *win, int r);
 
 /*
-**	mandelbrot.c
+**	fractals
 */
 void			mandelbrot(t_params *e);
-
-/*
-**	julia.c
-*/
 void			julia(t_params *e);
-
-/*
-**	burningship.c
-*/
 void			burningship(t_params *e);
-
-/*
-**	hooks.c
-*/
-void			hooks(t_params *e);
+//void			newton(t_params *e);
 
 /*
 **	ft.c
@@ -101,6 +90,11 @@ int				ft_isspace(char c);
 */
 void			iwrite(t_params *e, int x, int y, int color);
 int				rgb_to_i(int r, int g, int b);
-int				z_iter(t_complex *z, t_complex *c);
+
+/*
+**	hooks.c
+*/
+void			hooks(t_params *e);
+
 
 #endif

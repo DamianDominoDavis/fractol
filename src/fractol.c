@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 16:20:58 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/23 19:04:25 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	init(int c, char **v, t_params *e)
 	if (0 >= (e->frac.id = ft_atoi(v[1])))
 		return (-1);
 	e->frac.gen = (c == 3) ? ft_atoi(v[2]) : 0;
-	if (e->frac.id > 3 || e->frac.gen > 1)
+	if (e->frac.id > IDMAX || e->frac.gen > 1)
 		return (-1);
 	e->frac.zoom = 1.0;
 	e->frac.pos_x = 0.0;
@@ -60,6 +60,7 @@ int			main(int c, char **v)
 		ft_putstr("id:\t[1] Mandelbrot, c = 0+0i\n");
 		ft_putstr("\t[2] Julia, c = (\u03A6-2)+(\u03A6-1)i\n");
 		ft_putstr("\t[3] Burning Ship, c = 0+0i\n");
+		ft_putstr("\t[4] Newton, c = 0+0i\n");
 		ft_putstr("opt:\tabsolutely useless\n");
 	}
 	return (0);
