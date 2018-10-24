@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 19:38:29 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:24:22 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define MAX_IT (int)60
 # define C_WHITE (int)16777215
 # define C_GOLD (int)-939475336
+# define C_NAVY (int)1644876
+# define C_WATERMELON (int)16992805
 # define IDMAX (int)4
 
 typedef struct	s_fractal
@@ -83,13 +85,12 @@ size_t			ft_strlen(char *str);
 void			ft_putstr(char *str);
 int				ft_atoi(const char *str);
 int				ft_isdigit(char c);
-int				ft_isspace(char c);
 
 /*
 **	util.c
 */
 void			iwrite(t_params *e, int x, int y, int color);
-int				rgb_to_i(int r, int g, int b);
+int				rgbint(int r, int g, int b);
 
 /*
 **	hooks.c

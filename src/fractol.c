@@ -6,12 +6,11 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 19:04:25 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:26:00 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 static int	init(int c, char **v, t_params *e)
 {

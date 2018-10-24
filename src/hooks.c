@@ -6,11 +6,12 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 19:38:57 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:21:44 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 static int	loop(t_params *e)
 {
@@ -26,6 +27,8 @@ static int	key_hook(int key, t_params *e)
 {
 	if (key == 53)
 		die(e->mlx, e->win, 0);
+	if (key == 32)
+		e->clic.active = e->clic.active ? 0 : 1;
 	return (0);
 }
 

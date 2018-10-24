@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 22:19:59 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 18:43:31 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:24:33 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static int			z_iter(t_complex *z, t_complex *c)
 static int			color(int i)
 {
 	if (i == MAX_IT)
-		return (rgb_to_i(259, 74, 37));
+		return (C_WATERMELON);
 	else
-		return (rgb_to_i(
+		return (rgbint(
 			sin((float)i / ((float)MAX_IT / 3.5)) * 255,
 			sin((float)i / ((float)MAX_IT / 1.5)) * 255,
 			sin((float)i / ((float)MAX_IT / 2)) * 255));

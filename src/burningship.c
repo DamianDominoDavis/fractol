@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 14:37:04 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 18:41:00 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:19:28 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	color(int i)
 	if (i == MAX_IT)
 		return (0);
 	else
-		return (rgb_to_i(
+		return (rgbint(
 			sin((float)i / ((float)MAX_IT / 5)) * 255,
 			sin((float)i / ((float)MAX_IT) / 3) * 72,
 			0));

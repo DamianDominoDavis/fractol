@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 14:37:04 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/23 19:39:59 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 14:22:22 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	color(int i, t_params *e)
 
 	tmp = (e->frac.gen) ? (int)(MAX_IT + e->frac.zoom / 1000) : MAX_IT;
 	if (i == tmp)
-		return (rgb_to_i(25, 25, 76));
+		return (C_NAVY);
 	else
-		return (rgb_to_i(
+		return (rgbint(
 			sin((float)i / ((float)MAX_IT / 1.5)) * 255,
 			sin((float)i / ((float)MAX_IT / 2)) * 255,
 			sin((float)i / ((float)MAX_IT / 3.5)) * 255));
