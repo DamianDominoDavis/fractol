@@ -6,11 +6,40 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 14:19:04 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 20:24:09 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_putstr(const char *s)
+{
+	const char	*p;
+
+	p = s;
+	while (*p)
+		p++;
+	write(1, s, p - s);
+}
+
+int		ft_atoi(const char *str)
+{
+	long	out;
+	long	sign;
+
+	out = 0;
+	sign = 1;
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\r' || *str
+		== '\v' || *str == '\f')
+		str++;
+	if (*str == '-' || *str == '+')
+		sign = (*str++ == '-') ? -1 : 1;
+	if (*str == '\0')
+		return ((int)(sign * 0));
+	while (*str && *str >= '0' && *str <= '9')
+		out = out * 10 + *str++ - '0';
+	return ((int)(out * sign));
+}
 
 void	iwrite(t_params *e, int x, int y, int color)
 {
@@ -26,7 +55,7 @@ void	iwrite(t_params *e, int x, int y, int color)
 	}
 }
 
-int		rgbint(int r, int g, int b)
+int		rgbint(const int r, const int g, const int b)
 {
 	return ((r << 16) + (g << 8) + b);
 }

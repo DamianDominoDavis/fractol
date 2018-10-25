@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 14:21:44 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 20:21:21 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	button_press(int keycode, int x, int y, t_params *e)
 int	button_release(int keycode, int x, int y, t_params *e)
 {
 	if (keycode == 1)
-		e->clic = (t_clic){x, y, e->clic.active};
+		e->click = (t_click){x, y, e->click.active};
 	return (0);
 }
 
 int	motion_notify(int x, int y, t_params *e)
 {
-	if (!e->clic.active)
-		e->clic = (t_clic){x, y, e->clic.active};
+	if (!e->click.active)
+		e->click = (t_click){x, y, e->click.active};
 	return (0);
 }
 
@@ -55,9 +55,9 @@ int	loop(t_params *e)
 int	key_press(int key, t_params *e)
 {
 	if (key == 53)
-		die(e->mlx, e->win, 0);
+		die(e, 0);
 	if (key == 32)
-		e->clic.active = e->clic.active ? 0 : 1;
+		e->click.active = e->click.active ? 0 : 1;
 	return (0);
 }
 

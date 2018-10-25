@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 14:26:00 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/24 20:21:28 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,38 @@
 
 static int	init(int c, char **v, t_params *e)
 {
-	if ((ft_strlen(v[1]) != 1 || !ft_isdigit(v[1][0]))
-		|| (c == 3 && (ft_strlen(v[2]) != 1 || !ft_isdigit(v[2][0]))))
-		return (-1);
-	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol");
-	if (0 >= (e->frac.id = ft_atoi(v[1])))
-		return (-1);
-	e->frac.gen = (c == 3) ? ft_atoi(v[2]) : 0;
-	if (e->frac.id > IDMAX || e->frac.gen > 1)
-		return (-1);
-	e->frac.zoom = 1.0;
-	e->frac.pos_x = 0.0;
-	e->frac.pos_y = 0.0;
-	e->frac.max_x = 2.4;
-	e->frac.max_y = 1.5;
-	e->clic = (t_clic){0, 0, 0};
-	e->img.ptr = mlx_new_image(e->mlx, W_WIDTH, W_HEIGHT);
+	int		id;
+	int		gen;
+
+	if (c < 2)
+		return (0);
+	id = ft_atoi(v[1]);
+	gen = (c == 3) ? ft_atoi(v[2]) : 0;
+	if (!((c >= 2 && c <= 3) && (id >= 1 && id <= 3) && (gen <= 1)))
+		return (0);
+	e->frac = (t_fractal){ft_atoi(v[1]), 1.0, 0, 0, 2.4, 1.5,
+		(c == 3) ? ft_atoi(v[2]) : 0};
+	e->click = (t_click){1, 0, 0};
+	if (!(e->mlx = mlx_init())
+		|| !(e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol"))
+		|| !(e->img.ptr = mlx_new_image(e->mlx, W_WIDTH, W_HEIGHT)))
+		die(e, -1);
 	e->img.data = mlx_get_data_addr(e->img.ptr, &e->img.bpp, &e->img.size_line,
 		&e->img.endian);
-	return (0);
+	return (1);
 }
 
-void		die(void *mlx, void *win, int r)
+void		die(t_params *e, int r)
 {
-	if (mlx)
+	if (e->mlx)
 	{
-		if (win)
-			mlx_destroy_window(mlx, win);
-		free(mlx);
+		if (e->win)
+			mlx_destroy_window(e->mlx, e->win);
+		if (e->img.ptr)
+			mlx_destroy_image(e->mlx, e->img.ptr);
+		free(e->mlx);
 	}
+	ft_putstr((r >= 0) ? " done\n" : " crash\n");
 	exit(r);
 }
 
@@ -54,8 +56,9 @@ int			main(int c, char **v)
 {
 	t_params e;
 
-	if (c > 1 && c < 3 && 0 == init(c, v, &e))
+	if (init(c, v, &e))
 	{
+		ft_putstr("fractol");
 		mlx_hook(e.win, 6, (1L<<6), motion_notify, &e);
 		mlx_hook(e.win, 4, (1L<<2), button_press, &e);
 		mlx_hook(e.win, 5, (1L<<3), button_release, &e);
@@ -66,11 +69,11 @@ int			main(int c, char **v)
 	else
 	{
 		ft_putstr("usage: fractol id [opt]\n");
-		ft_putstr("id:\t[1] Mandelbrot, c = 0+0i\n");
-		ft_putstr("\t[2] Julia, c = (\u03A6-2)+(\u03A6-1)i\n");
-		ft_putstr("\t[3] Burning Ship, c = 0+0i\n");
-		//ft_putstr("\t[4] Newton, c = 0+0i\n");
-		ft_putstr("opt:\tabsolutely useless\n");
+		ft_putstr("  id: [1] \033[0;34mMandelbrot\033[0m, c = 0+0i\n");
+		ft_putstr("      [2] \033[0;32mJulia\033[0m, c = (\u03A6-2)+(\u03A6-1)i\n");
+		ft_putstr("      [3] \033[0;31mBurning Ship\033[0m, c = 0+0i\n");
+		//ft_putstr("      [4] Newton, c = 0+0i\n");
+		ft_putstr("  opt:\tabsolutely useless\n");
 	}
 	return (0);
 }
