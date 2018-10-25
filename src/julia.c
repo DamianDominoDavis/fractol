@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 22:19:59 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 14:24:33 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 01:10:41 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static t_complex	z_init(int x, int y, t_params *e, t_complex *c)
 	max_y = (e->frac.max_y / e->frac.zoom) + e->frac.pos_y;
 	z.r = min_x + x * (max_x - min_x) / W_WIDTH;
 	z.i = min_y + y * (max_y - min_y) / W_HEIGHT;
-	c->r = 0.5 * (1 + sqrt(5)) - 2;
-	c->i = 0.5 * (1 + sqrt(5)) - 1;
+	c->r = (0.5 * e->click.x) / (long double)W_WIDTH;
+	c->i = (0.5 * e->click.y) / (long double)W_HEIGHT;
 	return (z);
 }
 

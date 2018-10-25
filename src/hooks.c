@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 20:21:21 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 01:15:56 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	button_press(int keycode, int x, int y, t_params *e)
 		direction = keycode == 4 ? 0.5 : 2.0;
 		e->frac.zoom *= direction;
 		e->frac.pos_x += ((x - (W_WIDTH / 2)) / (W_WIDTH / 2)) / e->frac.zoom;
-		e->frac.pos_y += (y - (W_HEIGHT / 2) / (W_HEIGHT / 2)) / e->frac.zoom;
+		e->frac.pos_y += ((y - (W_HEIGHT / 2)) / (W_HEIGHT / 2)) / e->frac.zoom;
 	}
 	return (0);
 }
@@ -30,20 +30,20 @@ int	button_press(int keycode, int x, int y, t_params *e)
 int	button_release(int keycode, int x, int y, t_params *e)
 {
 	if (keycode == 1)
-		e->click = (t_click){x, y, e->click.active};
+	e->click = (t_click){e->click.active, x, y};
 	return (0);
 }
 
 int	motion_notify(int x, int y, t_params *e)
 {
-	if (!e->click.active)
-		e->click = (t_click){x, y, e->click.active};
+	if (e->click.active)
+		e->click = (t_click){e->click.active, x, y};
 	return (0);
 }
 
 int	loop(t_params *e)
 {
-	void (**fractals)(t_params*);
+	static void (**fractals)(t_params*);
 
 	fractals = (void(*[IDMAX + 1])(t_params*))
 		{NULL, mandelbrot, julia, burningship};//, newton};
@@ -60,4 +60,3 @@ int	key_press(int key, t_params *e)
 		e->click.active = e->click.active ? 0 : 1;
 	return (0);
 }
-
