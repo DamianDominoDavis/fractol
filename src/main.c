@@ -12,23 +12,25 @@
 
 #include "fractol.h"
 
+static int	ptest(int c, char **v)
+{
+	(void)c;
+	(void)v;
+	return (0);
+}
+
 static int	init(int c, char **v, t_params *e)
 {
-	if ((ft_strlen(v[1]) != 1 || !ft_isdigit(v[1][0]))
-		|| (c == 3 && (ft_strlen(v[2]) != 1 || !ft_isdigit(v[2][0]))))
-		return (-1);
-	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol");
+	if (!ft_isdigit(v[1][0]) || (c == 3 && !ft_isdigit(v[2][0])))
+		die(e, -1);
 	if (0 >= (e->frac.id = ft_atoi(v[1])))
-		return (-1);
+		die(e, -1);
 	e->frac.gen = (c == 3) ? ft_atoi(v[2]) : 0;
 	if (e->frac.id > IDMAX || e->frac.gen > 1)
-		return (-1);
-	e->frac.zoom = 1.0;
-	e->frac.pos_x = 0.0;
-	e->frac.pos_y = 0.0;
-	e->frac.max_x = 2.4;
-	e->frac.max_y = 1.5;
+		die(e, -1);
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol");
+	e->frac = (t_fractal){e->frac.id, 1.0, 0, 0, 2.4, 1.5, e->frac.gen};
 	e->clic = (t_clic){0, 0, 0};
 	e->img.ptr = mlx_new_image(e->mlx, W_WIDTH, W_HEIGHT);
 	e->img.data = mlx_get_data_addr(e->img.ptr, &e->img.bpp, &e->img.size_line,
@@ -36,13 +38,15 @@ static int	init(int c, char **v, t_params *e)
 	return (0);
 }
 
-void		die(void *mlx, void *win, int r)
+void		die(t_params *e, int r)
 {
-	if (mlx)
+	if (e->mlx)
 	{
-		if (win)
-			mlx_destroy_window(mlx, win);
-		free(mlx);
+		if (e->win)
+			mlx_destroy_window(e->mlx, e->win);
+		if (e->img.ptr)
+			mlx_destroy_image(e->mlx, e->img.ptr);
+		free(e->mlx);
 	}
 	exit(r);
 }

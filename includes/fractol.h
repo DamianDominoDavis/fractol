@@ -71,7 +71,7 @@ typedef struct	s_params
 /*
 **	main.c
 */
-void			die(void *mlx, void *win, int r);
+void			die(t_params *e, int r);
 void			hooks(t_params *e);
 
 /*
@@ -99,11 +99,11 @@ int				rgbint(int r, int g, int b);
 /*
 **	hooks.c
 */
-int	button_press(int keycode, int x, int y, t_params *e);
-int	button_release(int keycode, int x, int y, t_params *e);
-int	motion_notify(int x, int y, t_params *e);
-int	loop(t_params *e);
-int	key_press(int key, t_params *e);
+int				button_press(int keycode, int x, int y, t_params *e);
+int				button_release(int keycode, int x, int y, t_params *e);
+int				motion_notify(int x, int y, t_params *e);
+int				loop(t_params *e);
+int				key_press(int key, t_params *e);
 
 
 #endif

@@ -55,7 +55,7 @@ int	loop(t_params *e)
 int	key_press(int key, t_params *e)
 {
 	if (key == 53)
-		die(e->mlx, e->win, 0);
+		die(e, 0);
 	if (key == 32)
 		e->clic.active = e->clic.active ? 0 : 1;
 	return (0);
