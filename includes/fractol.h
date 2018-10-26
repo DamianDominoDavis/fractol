@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/25 01:12:29 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 19:23:33 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 # define FRACTOL_H
 
 # include <math.h>
-# include <stdlib.h> //free, exit
-# include <unistd.h> //write
+# include <stdlib.h>
+# include <unistd.h>
 # include "mlx.h"
 
 # define W_WIDTH (int)800
 # define W_HEIGHT (int)600
 # define MAX_IT (int)100
-# define C_NAVY (int)1644876
-# define C_WATERMELON (int)16992805
 # define IDMAX (int)3
 
 typedef struct	s_fractal
@@ -33,7 +31,6 @@ typedef struct	s_fractal
 	float		pos_y;
 	double		max_x;
 	double		max_y;
-	int			gen;
 }				t_fractal;
 
 typedef struct	s_image
@@ -52,6 +49,17 @@ typedef struct	s_click
 	int			y;
 }				t_click;
 
+typedef struct	s_palette
+{
+	int			k;
+	long double	r;
+	long double	g;
+	long double	b;
+	int			rm;
+	int			gm;
+	int			bm;
+}				t_palette;
+
 typedef struct	s_params
 {
 	void		*mlx;
@@ -59,6 +67,8 @@ typedef struct	s_params
 	t_fractal	frac;
 	t_image		img;
 	t_click		click;
+	int			inst;
+	t_palette	palette;
 }				t_params;
 
 typedef struct	s_complex
@@ -79,7 +89,6 @@ void			hooks(t_params *e);
 void			mandelbrot(t_params *e);
 void			julia(t_params *e);
 void			burningship(t_params *e);
-//void			newton(t_params *e);
 
 /*
 **	util.c
@@ -87,7 +96,8 @@ void			burningship(t_params *e);
 void			ft_putstr(const char *str);
 int				ft_atoi(const char *str);
 void			iwrite(t_params *e, int x, int y, int color);
-int				rgbint(const int r, const int g, const int b);
+int				rgb(int r, int g, int b);
+int				color(int i, t_palette p);
 
 /*
 **	hooks.c

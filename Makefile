@@ -1,7 +1,7 @@
 NAME = fractol
 
 SRC_DIR = ./src/
-SRC_FILES = main.c hooks.c util.c mandelbrot.c julia.c burningship.c #newton.c
+SRC_FILES = main.c hooks.c util.c mandelbrot.c julia.c burningship.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 INC_DIR = ./includes/
@@ -43,7 +43,8 @@ fclean: clean
 re: fclean all
 
 do: 
-	@make re
+	@make clean
+	@make
 	@make clean
 
 .PHONY: all obj $(NAME) clean fclean re do

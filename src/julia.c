@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 22:19:59 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/25 01:10:41 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 18:28:17 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ static int			z_iter(t_complex *z, t_complex *c)
 	return ((int)((z->r * z->r + z->i * z->i >= 4)));
 }
 
-static int			color(int i)
-{
-	if (i == MAX_IT)
-		return (C_WATERMELON);
-	else
-		return (rgbint(
-			sin((float)i / ((float)MAX_IT / 3.5)) * 255,
-			sin((float)i / ((float)MAX_IT / 1.5)) * 255,
-			sin((float)i / ((float)MAX_IT / 2)) * 255));
-}
-
 void				julia(t_params *e)
 {
 	int			i;
@@ -72,7 +61,7 @@ void				julia(t_params *e)
 			while (++i < MAX_IT)
 				if (z_iter(&z, &c))
 					break ;
-			iwrite(e, x, y, color(i));
+			iwrite(e, x, y, color(i, e->palette));
 		}
 	}
 }

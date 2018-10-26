@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 20:42:37 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 19:08:35 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,19 @@
 static int	init(int c, char **v, t_params *e)
 {
 	int		id;
-	int		gen;
 
-	if (c < 2)
+	if (c != 2 || (id = ft_atoi(v[1])) <= 0 || id > IDMAX)
 		return (0);
-	id = ft_atoi(v[1]);
-	gen = (c == 3) ? ft_atoi(v[2]) : 0;
-	if (!((c >= 2 && c <= 3) && (id >= 1 && id <= 3) && (gen <= 1)))
-		return (0);
-	e->frac = (t_fractal){ft_atoi(v[1]), 1.0, 0, 0, 2.4, 1.5,
-		(c == 3) ? ft_atoi(v[2]) : 0};
-	e->click = (t_click){1, 0, 0};
+	e->frac = (t_fractal){ft_atoi(v[1]), 1.0, 0, 0, 2.4, 1.5};
+	e->click = (t_click){1, 0.5 * (1 + sqrt(5)) - 2, 0.5 * (1 + sqrt(5)) - 1};
 	if (!(e->mlx = mlx_init())
 		|| !(e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol"))
 		|| !(e->img.ptr = mlx_new_image(e->mlx, W_WIDTH, W_HEIGHT)))
 		die(e, -1);
 	e->img.data = mlx_get_data_addr(e->img.ptr, &e->img.bpp, &e->img.size_line,
 		&e->img.endian);
+	e->inst = 1;
+	e->palette = (t_palette){1644876, 1.5, 2, 3.5, 255, 255, 255};
 	return (1);
 }
 
@@ -52,6 +48,7 @@ void		die(t_params *e, int r)
 /*
 ** hook constants from typical /usr/include/X11/X.h
 */
+
 int			main(int c, char **v)
 {
 	t_params e;
@@ -59,21 +56,19 @@ int			main(int c, char **v)
 	if (init(c, v, &e))
 	{
 		ft_putstr("fractol");
-		mlx_hook(e.win, 6, (1L<<6), motion_notify, &e);
-		mlx_hook(e.win, 4, (1L<<2), button_press, &e);
-		mlx_hook(e.win, 5, (1L<<3), button_release, &e);
+		mlx_hook(e.win, 6, (1L << 6), motion_notify, &e);
+		mlx_hook(e.win, 4, (1L << 2), button_press, &e);
+		mlx_hook(e.win, 5, (1L << 3), button_release, &e);
 		mlx_hook(e.win, 2, 5, key_press, &e);
 		mlx_loop_hook(e.mlx, loop, &e);
 		mlx_loop(e.mlx);
 	}
 	else
 	{
-		ft_putstr("usage: fractol id [opt]\n");
-		ft_putstr("  id: [1] \033[0;34mMandelbrot\033[0m, c = 0+0i\n");
-		ft_putstr("      [2] \033[0;32mJulia\033[0m, c = (\u03A6-2)+(\u03A6-1)i\n");
-		ft_putstr("      [3] \033[0;31mBurning Ship\033[0m, c = 0+0i\n");
-		//ft_putstr("      [4] Newton, c = 0+0i\n");
-		ft_putstr("  opt:\tabsolutely useless\n");
+		ft_putstr("usage: fractol id\n");
+		ft_putstr("  id: [1] \033[0;34mMandelbrot\033[0m\n");
+		ft_putstr("      [2] \033[0;32mJulia\033[0m\n");
+		ft_putstr("      [3] \033[0;31mBurning Ship\033[0m\n");
 	}
 	return (0);
 }

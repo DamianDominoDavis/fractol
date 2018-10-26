@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 21:50:22 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/24 20:24:09 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 19:24:13 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,17 @@ void	iwrite(t_params *e, int x, int y, int color)
 	}
 }
 
-int		rgbint(const int r, const int g, const int b)
+int		rgb(int r, int g, int b)
 {
 	return ((r << 16) + (g << 8) + b);
+}
+
+int		color(int i, t_palette c)
+{
+	if (i == MAX_IT)
+		return (c.k);
+	return (rgb(
+		sin((float)i / ((float)MAX_IT / c.r)) * c.rm,
+		sin((float)i / ((float)MAX_IT / c.g)) * c.gm,
+		sin((float)i / ((float)MAX_IT / c.b)) * c.bm));
 }
