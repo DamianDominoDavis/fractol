@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 18:05:43 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/25 19:08:35 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 21:39:53 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	init(int c, char **v, t_params *e)
 
 	if (c != 2 || (id = ft_atoi(v[1])) <= 0 || id > IDMAX)
 		return (0);
-	e->frac = (t_fractal){ft_atoi(v[1]), 1.0, 0, 0, 2.4, 1.5};
-	e->click = (t_click){1, 0.5 * (1 + sqrt(5)) - 2, 0.5 * (1 + sqrt(5)) - 1};
+	e->frac = (t_fractal){id, 1.0, 0, 0, 2.4, 1.5};
+	e->click = (t_click){1, 0, 0};
 	if (!(e->mlx = mlx_init())
 		|| !(e->win = mlx_new_window(e->mlx, W_WIDTH, W_HEIGHT, "fractol"))
 		|| !(e->img.ptr = mlx_new_image(e->mlx, W_WIDTH, W_HEIGHT)))

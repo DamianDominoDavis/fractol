@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:57:21 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/25 19:23:33 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 21:35:57 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define W_WIDTH (int)800
 # define W_HEIGHT (int)600
-# define MAX_IT (int)100
+# define MAX_IT (int)150
 # define IDMAX (int)3
 
 typedef struct	s_fractal

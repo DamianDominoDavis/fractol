@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 16:47:03 by cbrill            #+#    #+#             */
-/*   Updated: 2018/10/25 19:23:59 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/10/25 21:08:48 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	loop(t_params *e)
 			"[' '] blind");
 		if (e->frac.id == 2)
 			mlx_string_put(e->mlx, e->win, W_WIDTH - 110, W_HEIGHT - 30,
-				rgb(255, 255, 255), "['U'] stop");
+				rgb(255, 255, 255), (e->click.active) ? "['U'] stop" :
+				"['U'] go");
 	}
 	return (0);
 }
