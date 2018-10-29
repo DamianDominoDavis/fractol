@@ -86,6 +86,5 @@ int	key_press(int key, t_params *e)
 			(t_palette){rgb(247, 62, 103), 1, 4, 2, 0, 255, 0},
 			(t_palette){rgb(113, 188, 167), 1, 3, 5, 255, 255, 255}
 		}[(key > 90) ? key - 83 : key - 82];
-		;
 	return (0);
 }
